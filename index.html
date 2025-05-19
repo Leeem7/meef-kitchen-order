@@ -49,6 +49,7 @@
         <div class="mb-8">
           <h3 class="text-lg font-medium mb-4 text-amber-800">Select Your Flavor</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Cajun -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Cajun">
               <div class="flex items-center mb-2">
                 <span class="flavor-indicator bg-red-600"></span>
@@ -60,6 +61,7 @@
                 <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
               </div>
             </div>
+            <!-- Lemon Pepper -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Lemon Pepper">
               <div class="flex items-center mb-2">
                 <span class="flavor-indicator bg-yellow-400"></span>
@@ -71,6 +73,7 @@
                 <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
               </div>
             </div>
+            <!-- Honey Mustard -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Honey Mustard">
               <div class="flex items-center mb-2">
                 <span class="flavor-indicator bg-amber-300"></span>
@@ -82,6 +85,7 @@
                 <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
               </div>
             </div>
+            <!-- BBQ -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="BBQ">
               <div class="flex items-center mb-2">
                 <span class="flavor-indicator bg-red-800"></span>
@@ -143,6 +147,7 @@
 
   <!-- Debug‐enabled script -->
   <script>
+    // 1) Your Apps Script Web App URL
     const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbw1i_7gdXMG9ZSlyRX00mVw2h7udb8GZ9MAZT0q3qYeQ3TBEP8RT2Uy81uuAtxUPsdYbQ/exec';
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -162,6 +167,7 @@
       const successModal = document.getElementById('successModal');
       const closeSuccessBtn = document.getElementById('closeSuccess');
 
+      // Flavor selection
       flavorCards.forEach(card => {
         card.addEventListener('click', function() {
           flavorCards.forEach(c => {
@@ -175,21 +181,32 @@
         });
       });
 
+      // Quantity controls
       decreaseBtn.addEventListener('click', () => {
         if (quantity > 1) { quantity--; quantityInput.value = quantity; updateOrderSummary(); }
       });
       increaseBtn.addEventListener('click', () => {
-        quantity++; quantityInput.value = quantity; updateOrderSummary();
-      });
+        quantity++; quantityInput.value = quantity; updateOrderSummary(); }
+      );
       quantityInput.addEventListener('change', () => {
         quantity = parseInt(quantityInput.value) || 1;
         if (quantity < 1) { quantity = 1; quantityInput.value = 1; }
         updateOrderSummary();
       });
 
+      // Update summary
       function updateOrderSummary() {
         if (selectedFlavor) {
           const total = pricePerTurkey * quantity;
           orderSummary.innerHTML = `
-            <div class="mb-2"><div class="flex justify-between">
-              <span>${quantity} × ${selectedFlavor} Smoked Turkey</span>
+            <div class="mb-2">
+              <div class="flex justify-between">
+                <span>${quantity} × ${selectedFlavor} Smoked Turkey</span>
+                <span>$${total.toFixed(2)}</span>
+              </div>
+            </div>`;
+          totalPrice.textContent = `$${total.toFixed(2)}`;
+        } else {
+          orderSummary.innerHTML = '<p class="text-gray-500 italic">No items selected yet</p>';
+          totalPrice.textContent = '$0.00';
+        }
