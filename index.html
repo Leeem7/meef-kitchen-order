@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MEEF Kitchen – Build Your Order</title>
 
-  <!-- Static Tailwind CSS -->
+  <!-- Static Tailwind CSS (no eval()) -->
   <link
     href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css"
     rel="stylesheet"
   />
 
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link
@@ -20,53 +21,80 @@
 
   <style>
     body { font-family: 'Montserrat', sans-serif; background-color: #f8f5f2; }
-    .flavor-card { transition: all 0.3s ease; }
-    .flavor-card:hover { transform: translateY(-5px); }
+    .flavor-card { transition: transform 0.2s ease; }
+    .flavor-card:hover { transform: translateY(-4px); }
     .flavor-indicator { width:20px; height:20px; border-radius:50%; display:inline-block; margin-right:8px; }
   </style>
 </head>
 <body>
-  <div class="min-h-screen">
+  <div class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-amber-800 text-white py-6">
-      <div class="container mx-auto px-4">
-        <h1 class="text-3xl md:text-4xl font-bold text-center">MEEF Kitchen</h1>
-        <p class="text-center mt-2 text-amber-200 font-light">Craft Your Perfect Smoked Turkey</p>
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold">MEEF Kitchen</h1>
+        <p class="mt-2 text-amber-200 font-light">Craft Your Perfect Smoked Turkey</p>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-      <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <!-- Main -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+      <div class="bg-white rounded-lg shadow-lg p-6">
         <h2 class="text-2xl font-semibold mb-6 text-amber-900 border-b pb-2">Build Your Order</h2>
+
+        <!-- Customer Info -->
+        <div class="mb-8">
+          <h3 class="text-lg font-medium mb-4 text-amber-800">Your Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <input id="customerName" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"/>
+            </div>
+            <div>
+              <label for="customerPhone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <input id="customerPhone" type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"/>
+            </div>
+          </div>
+        </div>
 
         <!-- Flavor Selection -->
         <div class="mb-8">
           <h3 class="text-lg font-medium mb-4 text-amber-800">Select Your Flavor</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Cajun -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Cajun">
               <div class="flex items-center mb-2">
-                <span class="flavor-indicator bg-red-600"></span><h4 class="font-medium">Cajun</h4>
+                <span class="flavor-indicator bg-red-600"></span>
+                <h4 class="font-medium">Cajun</h4>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Bold, spicy blend</p>
+              <p class="text-sm text-gray-600 mb-3">Bold, spicy blend with paprika, cayenne, and herbs</p>
+              <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
             </div>
+            <!-- Lemon Pepper -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Lemon Pepper">
               <div class="flex items-center mb-2">
-                <span class="flavor-indicator bg-yellow-400"></span><h4 class="font-medium">Lemon Pepper</h4>
+                <span class="flavor-indicator bg-yellow-400"></span>
+                <h4 class="font-medium">Lemon Pepper</h4>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Zesty citrus</p>
+              <p class="text-sm text-gray-600 mb-3">Zesty citrus with cracked black pepper notes</p>
+              <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
             </div>
+            <!-- Honey Mustard -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="Honey Mustard">
               <div class="flex items-center mb-2">
-                <span class="flavor-indicator bg-amber-300"></span><h4 class="font-medium">Honey Mustard</h4>
+                <span class="flavor-indicator bg-amber-300"></span>
+                <h4 class="font-medium">Honey Mustard</h4>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Sweet & tangy</p>
+              <p class="text-sm text-gray-600 mb-3">Sweet honey balanced with tangy mustard</p>
+              <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
             </div>
+            <!-- BBQ -->
             <div class="flavor-card border rounded-lg p-4 cursor-pointer" data-flavor="BBQ">
               <div class="flex items-center mb-2">
-                <span class="flavor-indicator bg-red-800"></span><h4 class="font-medium">BBQ</h4>
+                <span class="flavor-indicator bg-red-800"></span>
+                <h4 class="font-medium">BBQ</h4>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Smoky & sweet</p>
+              <p class="text-sm text-gray-600 mb-3">Smoky, sweet with a hint of tanginess</p>
+              <div class="h-6 w-6 border-2 border-gray-300 rounded-full flex items-center justify-center flavor-checkbox"></div>
             </div>
           </div>
         </div>
@@ -76,9 +104,34 @@
           <h3 class="text-lg font-medium mb-4 text-amber-800">Quantity</h3>
           <div class="flex items-center">
             <button id="decreaseBtn" class="bg-amber-100 text-amber-800 px-4 py-2 rounded-l-md border border-amber-200 hover:bg-amber-200">-</button>
-            <input type="number" id="quantityInput" value="1" min="1" class="w-16 text-center py-2 border-t border-b border-amber-200"/>
+            <input id="quantityInput" type="number" value="1" min="1" class="w-16 text-center py-2 border-t border-b border-amber-200"/>
             <button id="increaseBtn" class="bg-amber-100 text-amber-800 px-4 py-2 rounded-r-md border border-amber-200 hover:bg-amber-200">+</button>
           </div>
+        </div>
+
+        <!-- Special Instructions -->
+        <div class="mb-8">
+          <h3 class="text-lg font-medium mb-4 text-amber-800">Special Instructions</h3>
+          <textarea id="specialInstructions" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none" placeholder="Any special requests..."></textarea>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="bg-amber-50 rounded-lg p-6 mb-6">
+          <h3 class="text-lg font-medium mb-4 text-amber-800">Order Summary</h3>
+          <div id="orderSummary" class="mb-4">
+            <p class="text-gray-500 italic">No items selected yet</p>
+          </div>
+          <div class="border-t border-amber-200 pt-4">
+            <div class="flex justify-between items-center">
+              <span class="font-medium">Total:</span>
+              <span id="totalPrice" class="text-xl font-bold text-amber-800">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Order Button -->
+        <div class="text-center">
+          <button id="submitOrder" class="bg-amber-700 text-white px-8 py-3 rounded-md hover:bg-amber-800 font-medium">Review Order</button>
         </div>
       </div>
     </main>
@@ -86,40 +139,158 @@
     <!-- Footer -->
     <footer class="bg-amber-900 text-amber-200 py-4">
       <div class="container mx-auto px-4 text-center">
-        <p>© 2023 MEEF Kitchen</p>
+        <p>© 2023 MEEF Kitchen. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
-  <!-- Interaction script -->
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <h3 class="text-xl font-bold mb-4 text-amber-800">Order Confirmation</h3>
+      <div id="confirmationDetails" class="mb-6"></div>
+      <div class="flex justify-end space-x-4">
+        <button id="editOrder" class="px-4 py-2 border border-amber-700 text-amber-700 rounded-md hover:bg-amber-50">Edit</button>
+        <button id="confirmOrder" class="px-4 py-2 bg-amber-700 text-white rounded-md hover:bg-amber-800">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-800">Order Submitted!</h3>
+        <p class="text-gray-600 mb-6">Thank you! We'll contact you shortly.</p>
+        <button id="closeSuccess" class="px-6 py-2 bg-amber-700 text-white rounded-md hover:bg-amber-800">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Interaction + Webhook Script -->
   <script>
+    const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbw1i_7gdXMG9ZSlyRX00mVw2h7udb8GZ9MAZT0q3qYeQ3TBEP8RT2Uy81uuAtxUPsdYbQ/exec';
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Flavor cards
+      let selectedFlavor = null, quantity = 1;
+      const price = 40;
       const cards = document.querySelectorAll('.flavor-card');
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          cards.forEach(c => c.classList.remove('border-amber-500','bg-amber-50'));
-          card.classList.add('border-amber-500','bg-amber-50');
-          console.log('Selected flavor:', card.dataset.flavor);
+      const qtyInput = document.getElementById('quantityInput');
+      const decBtn = document.getElementById('decreaseBtn');
+      const incBtn = document.getElementById('increaseBtn');
+      const summaryEl = document.getElementById('orderSummary');
+      const totalEl = document.getElementById('totalPrice');
+      const reviewBtn = document.getElementById('submitOrder');
+      const confirmModal = document.getElementById('confirmationModal');
+      const confirmDetails = document.getElementById('confirmationDetails');
+      const editBtn = document.getElementById('editOrder');
+      const confirmBtn = document.getElementById('confirmOrder');
+      const successModal = document.getElementById('successModal');
+      const closeBtn = document.getElementById('closeSuccess');
+
+      function updateSummary() {
+        if (!selectedFlavor) {
+          summaryEl.innerHTML = '<p class="text-gray-500 italic">No items selected yet</p>';
+          totalEl.textContent = '$0.00';
+          return;
+        }
+        const total = price * quantity;
+        summaryEl.innerHTML = `
+          <div class="mb-2"><div class="flex justify-between">
+            <span>${quantity} × ${selectedFlavor} Smoked Turkey</span>
+            <span>$${total.toFixed(2)}</span>
+          </div></div>`;
+        totalEl.textContent = `$${total.toFixed(2)}`;
+      }
+
+      // Flavor clicks
+      cards.forEach(c => {
+        c.addEventListener('click', () => {
+          cards.forEach(x => { x.classList.remove('border-amber-500','bg-amber-50'); x.querySelector('.flavor-checkbox').innerHTML = ''; });
+          c.classList.add('border-amber-500','bg-amber-50');
+          c.querySelector('.flavor-checkbox').innerHTML = '<div class="w-3 h-3 bg-amber-500 rounded-full"></div>';
+          selectedFlavor = c.dataset.flavor;
+          updateSummary();
         });
       });
 
-      // Quantity buttons
-      const qtyInput = document.getElementById('quantityInput');
-      document.getElementById('decreaseBtn').addEventListener('click', () => {
-        let v = parseInt(qtyInput.value) || 1;
-        if (v > 1) qtyInput.value = v - 1;
-        console.log('Quantity:', qtyInput.value);
+      // Quantity
+      decBtn.addEventListener('click', () => {
+        if (quantity>1) quantity--;
+        qtyInput.value = quantity; updateSummary();
       });
-      document.getElementById('increaseBtn').addEventListener('click', () => {
-        let v = parseInt(qtyInput.value) || 1;
-        qtyInput.value = v + 1;
-        console.log('Quantity:', qtyInput.value);
+      incBtn.addEventListener('click', () => {
+        quantity++; qtyInput.value = quantity; updateSummary();
+      });
+      qtyInput.addEventListener('change', () => {
+        quantity = Math.max(1, parseInt(qtyInput.value) || 1);
+        qtyInput.value = quantity; updateSummary();
+      });
+
+      // Review
+      reviewBtn.addEventListener('click', () => {
+        const name = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const notes = document.getElementById('specialInstructions').value.trim();
+        if (!name||!phone||!selectedFlavor) {
+          alert('Name, phone, and flavor are required.');
+          return;
+        }
+        const total = price * quantity;
+        confirmDetails.innerHTML = `
+          <div class="space-y-3">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Order:</strong> ${quantity} × ${selectedFlavor}</p>
+            ${notes?`<p><strong>Notes:</strong> ${notes}</p>`:''}
+            <p class="text-lg font-bold mt-4">Total: $${total.toFixed(2)}</p>
+          </div>`;
+        confirmModal.classList.remove('hidden');
+      });
+
+      // Edit
+      editBtn.addEventListener('click', () => confirmModal.classList.add('hidden'));
+
+      // Confirm & POST
+      confirmBtn.addEventListener('click', () => {
+        const payload = {
+          name: document.getElementById('customerName').value.trim(),
+          phone: document.getElementById('customerPhone').value.trim(),
+          flavor: selectedFlavor,
+          quantity,
+          instructions: document.getElementById('specialInstructions').value.trim()
+        };
+        fetch(WEBHOOK_URL, { method:'POST', body: JSON.stringify(payload) })
+          .then(r => r.text())
+          .then(t => {
+            if (t.trim()==='ok') {
+              confirmModal.classList.add('hidden');
+              successModal.classList.remove('hidden');
+            } else alert('Server replied: '+t);
+          })
+          .catch(e => alert('Network error: '+e));
+      });
+
+      // Close success & reset
+      closeBtn.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+        document.getElementById('customerName').value='';
+        document.getElementById('customerPhone').value='';
+        document.getElementById('specialInstructions').value='';
+        quantity=1; qtyInput.value='1';
+        cards.forEach(x => { x.classList.remove('border-amber-500','bg-amber-50'); x.querySelector('.flavor-checkbox').innerHTML=''; });
+        selectedFlavor=null; updateSummary();
       });
     });
   </script>
 </body>
 </html>
+
 
 
       
